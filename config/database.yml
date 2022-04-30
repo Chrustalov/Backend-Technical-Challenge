@@ -1,0 +1,18 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  database: backend_technical_challenge_development
+
+test:
+  <<: *default
+  database: backend_technical_challenge_test
+
+production:
+  <<: *default
+  database: backend_technical_challenge_production
+  username: backend_technical_challenge
+  password: <%= ENV['BACKEND_TECHNICAL_CHALLENGE_DATABASE_PASSWORD'] %>
