@@ -2,29 +2,36 @@
   .col-12
     .row.justify-content-center
       .col-9
-        h1 Task assigned to #{@member.name}
-        = link_to 'Add Task', new_task_path, class: 'btn btn-success mb-3'
-        = link_to 'Family Member Dashboard', root_path, class: 'btn btn-secondary mx-3 mb-3'
+        h1 All Tasks
+        .d-flex
+          = link_to 'Add Task', new_task_path, class: 'btn btn-success mb-3'
+          = link_to 'Family Member Dashboard', members_path, class: 'btn btn-secondary mx-3 mb-3'
         table.table.table-dark
           thead
             tr
               th scope="col" Task
               th scope="col" Status
+              th scope="col" Family Member
               th scope="col" Actions
           tbody
             - @tasks.each do |task|
               tr
                 - if task.status == 'complete'
-                  th = task.name
-                  td = task.status
+                  th = task.name 
+                  td 
+                    .text-green = task.status
+                  td = task.member.name
                   td
-                - else
-                  th = task.name
-                  td = task.status
+                - else 
+                  th = task.name 
+                  td 
+                    .text-red = task.status
+                  td = task.member.name
                   td
                     - Task::STATUSE_ACTIVE.each do |status|
                       = link_to 'mark as complete', update_status_task_path(task, status: status), method: :patch
         - if @tasks.count > 6
           h4 Showing tasks 1 to 5 out of #{@tasks.count}
         = will_paginate @tasks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, list_classes: %w(pagination justify-content-center)
- 
+
+            

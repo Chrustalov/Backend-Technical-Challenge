@@ -1,0 +1,8 @@
+= simple_form_for [@member], html: {class: 'form-group'} do |f|
+  .row
+    .col-12
+      label.mb-2 Name
+      = f.input :name, class: 'form-control', label: false, required: true
+    .col-12
+      = f.submit 'Save', class: 'btn btn-success mt-4 me-4 save'
+      = link_to t('back'), members_path, class: 'btn mt-4 btn-secondary'

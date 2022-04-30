@@ -16,8 +16,9 @@ class MembersController < ApplicationController
     end
   end
 
-  def show 
-    @member = Member.find params[:id]
+  def show
+    @member = Member.find(params[:id])
+    @tasks = @member.tasks.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   private

@@ -1,11 +1,24 @@
-h1 Family Member Dashboard
-
-= link_to 'Add Family Member', new_member_path, class: 'btn btn-success mb-3'
-
-- @members.each do |member|
-  article.mb-3
-    .row
-      .col-1
-        h4 = member.name
-      .col-1
-        = link_to t('global.button.show'), member_path(member), class: 'btn btn-primary' 
+.row.g-0.mt-5
+  .col-12
+    .row.justify-content-center
+      .col-7
+        h1 Family Member Dashboard
+        = link_to 'Add Family Member', new_member_path, class: 'btn btn-success mb-3'
+        table.table.table-dark
+          thead
+            tr
+              th scope="col" Name
+              th scope="col" Tasks
+              th scope="col" All tasks
+          tbody
+            - @members.each do |member|
+              tr
+                th = member.name 
+                td 
+                  = member.tasks.count
+                  |  tasks
+                td = link_to 'View Tasks', member_path(member), class: 'btn btn-primary'
+          tbody
+            th = link_to 'View All Tasks', tasks_path, class: 'btn btn-info'
+            th 
+            th 
