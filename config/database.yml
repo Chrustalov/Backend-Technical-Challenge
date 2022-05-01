@@ -13,6 +13,6 @@ test:
 
 production:
   <<: *default
-  database: backend_technical_challenge_production
-  username: backend_technical_challenge
-  password: <%= ENV['BACKEND_TECHNICAL_CHALLENGE_DATABASE_PASSWORD'] %>
+  database: <=% ENV['DATABASE_URL'] %>
+  # username: backend_technical_challenge
+  # password: <%= ENV['BACKEND_TECHNICAL_CHALLENGE_DATABASE_PASSWORD'] %>
