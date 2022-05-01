@@ -16,11 +16,13 @@
               tr
                 - if task.status == 'complete'
                   th = task.name
-                  td = task.status
+                  td 
+                    .text-green = task.status
                   td
                 - else
                   th = task.name
-                  td = task.status
+                  td 
+                    .text-red = task.status
                   td
                     - Task::STATUSE_ACTIVE.each do |status|
                       = link_to 'mark as complete', update_status_task_path(task, status: status), method: :patch
