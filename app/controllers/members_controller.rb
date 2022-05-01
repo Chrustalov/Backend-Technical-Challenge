@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   before_action :set_member!, only: [:show]
 
   def index
-    @members = Member.all
+    @members = Member.all.order(created_at: :desc)
   end
 
   def new 
