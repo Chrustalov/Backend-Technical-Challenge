@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  before_action :set_member!, only: [:show]
+
   def index
     @members = Member.all
   end
@@ -17,7 +19,6 @@ class MembersController < ApplicationController
   end
 
   def show
-    @member = Member.find(params[:id])
     @tasks = @member.tasks.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
@@ -25,5 +26,9 @@ class MembersController < ApplicationController
 
   def member_params 
     params.require(:member).permit(:name)
+  end
+
+  def set_member! 
+    @member = Member.find(params[:id])
   end
 end

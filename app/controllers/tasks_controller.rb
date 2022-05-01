@@ -1,12 +1,11 @@
 class TasksController < ApplicationController
-  # before_action :set_question!
+  before_action :set_task!, only: [:update_status]
 
   def index 
     @tasks = Task.all.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   def update_status
-    @task = Task.find(params[:id])
     @task.update(status: params[:status])
     session[:return_to] ||= request.referer
     redirect_to session.delete(:return_to)
@@ -34,7 +33,7 @@ class TasksController < ApplicationController
     params.require(:task).permit(:name, :status, :member_id)
   end
 
-  # def set_question!
-  #   @member = Member.find params[:member_id]
-  # end
+  def set_task!
+    @task = Task.find(params[:id])
+  end
 end
